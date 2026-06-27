@@ -65,46 +65,7 @@ donutChart/
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         donutChart LWC                                  │
-│                                                                         │
-│  ┌──────────────┐   @api chartData    ┌──────────────────────────────┐  │
-│  │  Parent LWC  │──────────────────►  │         donutChart.js        │  │
-│  │  or Flow     │                     │                              │  │
-│  └──────────────┘                     │  resolvedData getter         │  │
-│                                       │  ├─ from @api chartData      │  │
-│  ┌──────────────┐   @wire recordId    │  └─ from wired Apex data     │  │
-│  │  Record Page │──────────────────►  │                              │  │
-│  │  (recordId)  │                     │  computedSlices getter       │  │
-│  └──────────────┘                     │  ├─ buildArcPath()           │  │
-│                                       │  ├─ polarToCartesian()       │  │
-│  ┌──────────────┐   @AuraEnabled      │  └─ formatNumber()           │  │
-│  │  Apex Class  │◄────────────────    │                              │  │
-│  │  DonutChart  │   getChartData()    │  computedLegendItems getter  │  │
-│  │  Controller  │                     │                              │  │
-│  └──────────────┘                     │  Event handlers              │  │
-│                                       │  ├─ handleSliceMouseEnter    │  │
-│                                       │  ├─ handleSliceMouseLeave    │  │
-│                                       │  ├─ handleLegendMouseEnter   │  │
-│                                       │  └─ handleChartMouseLeave    │  │
-│                                       └──────────────┬───────────────┘  │
-│                                                      │ render           │
-│                                       ┌──────────────▼───────────────┐  │
-│                                       │      donutChart.html          │  │
-│                                       │                              │  │
-│                                       │  <svg>                       │  │
-│                                       │    <path> × N (slices)       │  │
-│                                       │    <circle> (donut hole)     │  │
-│                                       │    <text> (center label)     │  │
-│                                       │  </svg>                      │  │
-│                                       │  <div.chart-tooltip>         │  │
-│                                       │  <div.legend-container>      │  │
-│                                       └──────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────────┘
-```
-
----
+<img width="4300" height="3100" alt="donutChart - LWC Component Architecture" src="https://github.com/user-attachments/assets/c98abf2e-7af7-4c05-9e97-ecb69f2b45f2" />
 
 ## Quick Start
 
