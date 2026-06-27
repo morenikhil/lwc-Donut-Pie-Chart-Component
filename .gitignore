@@ -1,0 +1,18 @@
+# Salesforce DX
+.sfdx/
+.sf/
+*.lock.json
+
+# Node
+node_modules/
+npm-debug.log
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Deploy artifacts
+*.zip

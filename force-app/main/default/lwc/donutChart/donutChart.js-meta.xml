@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__Tab</target>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__RecordPage,lightning__HomePage,lightning__Tab">
+            <property name="title"          type="String"  label="Chart Title"
+                      description="Heading displayed at the top of the chart card." />
+            <property name="chartType"      type="String"  label="Chart Type"
+                      default="donut"
+                      datasource="donut,pie"
+                      description="'donut' renders a ring; 'pie' renders a solid circle." />
+            <property name="showLegend"     type="Boolean" label="Show Legend"
+                      default="false" />
+            <property name="legendPosition" type="String"  label="Legend Position"
+                      default="side-by-side"
+                      datasource="side-by-side,stacked,chart-only"
+                      description="Layout of the legend relative to the chart." />
+            <property name="showLegendTotal" type="Boolean" label="Show Legend Total Row"
+                      default="false" />
+            <property name="legendTitle"    type="String"  label="Legend Heading"
+                      description="Optional heading shown above the legend items." />
+            <property name="showCenterText" type="Boolean" label="Show Center Text (Donut)"
+                      default="true" />
+            <property name="centerLabel"    type="String"  label="Center Label (Donut)"
+                      default="Total" />
+            <property name="valuePrefix"    type="String"  label="Value Prefix"
+                      description="E.g. '$' for currency." />
+            <property name="valueSuffix"    type="String"  label="Value Suffix"
+                      description="E.g. ' hrs' for hours." />
+            <property name="footerText"     type="String"  label="Footer Annotation"
+                      description="Small text shown in the card footer." />
+            <property name="recordId"       type="String"  label="Record ID"
+                      description="Pass a record ID to auto-load data from Apex." />
+        </targetConfig>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="recordId" type="String" label="Record ID" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
