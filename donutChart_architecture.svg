@@ -1,0 +1,189 @@
+<svg viewBox="0 0 860 620" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'Segoe UI', Arial, sans-serif">
+  <title>donutChart LWC Component Architecture</title>
+  <desc>Architecture diagram showing data flow from Salesforce Platform through Apex Controller to the donutChart LWC component layers</desc>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#5a6ea1"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#04844B"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#FF8C00"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="620" fill="#f8f9fb" rx="12"/>
+
+  <!-- Title -->
+  <text x="430" y="34" text-anchor="middle" font-size="16" font-weight="700" fill="#16325c">donutChart — LWC Component Architecture</text>
+  <line x1="60" y1="44" x2="800" y2="44" stroke="#dde2ee" stroke-width="1"/>
+
+  <!-- LAYER 1: Data Sources -->
+  <text x="24" y="88" font-size="10" font-weight="700" fill="#706e6b" letter-spacing="1">DATA SOURCES</text>
+
+  <rect x="60" y="96" width="140" height="56" rx="8" fill="#e8f4fd" stroke="#0070D2" stroke-width="1.5"/>
+  <text x="130" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#0070D2">Record Page</text>
+  <text x="130" y="134" text-anchor="middle" font-size="9.5" fill="#444">recordId (platform)</text>
+  <text x="130" y="146" text-anchor="middle" font-size="9" fill="#777">AppPage / RecordPage</text>
+
+  <rect x="230" y="96" width="140" height="56" rx="8" fill="#e8f4fd" stroke="#0070D2" stroke-width="1.5"/>
+  <text x="300" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#0070D2">Parent LWC</text>
+  <text x="300" y="134" text-anchor="middle" font-size="9.5" fill="#444">@api chartData</text>
+  <text x="300" y="146" text-anchor="middle" font-size="9" fill="#777">Static / wired data</text>
+
+  <rect x="400" y="96" width="140" height="56" rx="8" fill="#e8f4fd" stroke="#0070D2" stroke-width="1.5"/>
+  <text x="470" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#0070D2">Flow Screen</text>
+  <text x="470" y="134" text-anchor="middle" font-size="9.5" fill="#444">@api chartData</text>
+  <text x="470" y="146" text-anchor="middle" font-size="9" fill="#777">Screen Flow input</text>
+
+  <rect x="570" y="96" width="140" height="56" rx="8" fill="#e8f4fd" stroke="#0070D2" stroke-width="1.5"/>
+  <text x="640" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#0070D2">App Builder</text>
+  <text x="640" y="134" text-anchor="middle" font-size="9.5" fill="#444">Design-time props</text>
+  <text x="640" y="146" text-anchor="middle" font-size="9" fill="#777">title / type / legend</text>
+
+  <!-- LAYER 2: Apex -->
+  <text x="24" y="200" font-size="10" font-weight="700" fill="#706e6b" letter-spacing="1">APEX LAYER</text>
+  <rect x="60" y="208" width="650" height="80" rx="8" fill="#fff8e1" stroke="#FFB75D" stroke-width="1.5"/>
+  <text x="385" y="229" text-anchor="middle" font-size="12" font-weight="700" fill="#7a5800">DonutChartController.cls  (@AuraEnabled cacheable=true)</text>
+
+  <rect x="76" y="240" width="148" height="36" rx="5" fill="#FFB75D" fill-opacity="0.25" stroke="#FFB75D" stroke-width="1"/>
+  <text x="150" y="256" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7a5800">getChartData(recordId)</text>
+  <text x="150" y="269" text-anchor="middle" font-size="8.5" fill="#7a5800">Generic dispatcher</text>
+
+  <rect x="236" y="240" width="148" height="36" rx="5" fill="#FFB75D" fill-opacity="0.25" stroke="#FFB75D" stroke-width="1"/>
+  <text x="310" y="256" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7a5800">getOpportunityStageData()</text>
+  <text x="310" y="269" text-anchor="middle" font-size="8.5" fill="#7a5800">Opp revenue by Stage</text>
+
+  <rect x="396" y="240" width="148" height="36" rx="5" fill="#FFB75D" fill-opacity="0.25" stroke="#FFB75D" stroke-width="1"/>
+  <text x="470" y="256" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7a5800">getCaseStatusData()</text>
+  <text x="470" y="269" text-anchor="middle" font-size="8.5" fill="#7a5800">Cases by Status</text>
+
+  <rect x="556" y="240" width="148" height="36" rx="5" fill="#FFB75D" fill-opacity="0.25" stroke="#FFB75D" stroke-width="1"/>
+  <text x="630" y="256" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7a5800">getAccountIndustryData()</text>
+  <text x="630" y="269" text-anchor="middle" font-size="8.5" fill="#7a5800">Accounts by Industry</text>
+
+  <!-- Arrows: sources → Apex/LWC -->
+  <line x1="130" y1="152" x2="130" y2="200" stroke="#5a6ea1" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+  <line x1="300" y1="152" x2="300" y2="310" stroke="#5a6ea1" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+  <line x1="470" y1="152" x2="470" y2="310" stroke="#5a6ea1" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+  <line x1="640" y1="152" x2="640" y2="310" stroke="#5a6ea1" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+  <text x="92" y="179" font-size="8.5" fill="#5a6ea1">@wire</text>
+
+  <!-- Arrow: Apex → JS -->
+  <line x1="385" y1="288" x2="385" y2="310" stroke="#04844B" stroke-width="2" marker-end="url(#arr-green)"/>
+  <text x="388" y="304" font-size="8.5" fill="#04844B">ChartDataItem[]</text>
+
+  <!-- LAYER 3: LWC Component -->
+  <text x="24" y="328" font-size="10" font-weight="700" fill="#706e6b" letter-spacing="1">LWC COMPONENT — donutChart</text>
+
+  <!-- JS box -->
+  <rect x="60" y="336" width="220" height="170" rx="8" fill="#fff" stroke="#16325c" stroke-width="2"/>
+  <rect x="60" y="336" width="220" height="24" rx="8" fill="#16325c"/>
+  <rect x="60" y="348" width="220" height="12" fill="#16325c"/>
+  <text x="170" y="352" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">donutChart.js</text>
+
+  <text x="76" y="375" font-size="9" fill="#444">@api  chartData / recordId / colorPalette</text>
+  <text x="76" y="389" font-size="9" fill="#444">@wire getChartData({ recordId })</text>
+  <line x1="76" y1="394" x2="268" y2="394" stroke="#eee" stroke-width="1"/>
+  <text x="76" y="408" font-size="9" font-weight="600" fill="#16325c">Getters</text>
+  <text x="76" y="421" font-size="8.5" fill="#555">  computedSlices → buildArcPath()</text>
+  <text x="76" y="433" font-size="8.5" fill="#555">  computedLegendItems</text>
+  <text x="76" y="445" font-size="8.5" fill="#555">  formattedTotal / tooltip state</text>
+  <line x1="76" y1="450" x2="268" y2="450" stroke="#eee" stroke-width="1"/>
+  <text x="76" y="463" font-size="9" font-weight="600" fill="#16325c">Handlers</text>
+  <text x="76" y="476" font-size="8.5" fill="#555">  mouseenter / mouseleave / focus</text>
+  <text x="76" y="488" font-size="8.5" fill="#555">  legend hover ↔ slice highlight</text>
+  <text x="76" y="500" font-size="8.5" fill="#555">  @api refresh()</text>
+
+  <!-- HTML box -->
+  <rect x="310" y="336" width="240" height="170" rx="8" fill="#fff" stroke="#16325c" stroke-width="2"/>
+  <rect x="310" y="336" width="240" height="24" rx="8" fill="#16325c"/>
+  <rect x="310" y="348" width="240" height="12" fill="#16325c"/>
+  <text x="430" y="352" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">donutChart.html</text>
+
+  <text x="326" y="375" font-size="9" font-weight="600" fill="#16325c">&lt;svg&gt; Chart Area</text>
+  <text x="326" y="388" font-size="8.5" fill="#555">  &lt;path&gt; × N slices  (arc math)</text>
+  <text x="326" y="400" font-size="8.5" fill="#555">  &lt;circle&gt; donut hole</text>
+  <text x="326" y="412" font-size="8.5" fill="#555">  &lt;text&gt; center label + total</text>
+  <line x1="326" y1="418" x2="538" y2="418" stroke="#eee" stroke-width="1"/>
+  <text x="326" y="431" font-size="9" font-weight="600" fill="#16325c">Overlay States</text>
+  <text x="326" y="444" font-size="8.5" fill="#555">  Tooltip div (absolute positioned)</text>
+  <text x="326" y="456" font-size="8.5" fill="#555">  Loading spinner</text>
+  <text x="326" y="468" font-size="8.5" fill="#555">  Empty / Error notice</text>
+  <line x1="326" y1="474" x2="538" y2="474" stroke="#eee" stroke-width="1"/>
+  <text x="326" y="487" font-size="9" font-weight="600" fill="#16325c">Legend</text>
+  <text x="326" y="500" font-size="8.5" fill="#555">  Swatch + label + value + %</text>
+
+  <!-- CSS box -->
+  <rect x="578" y="336" width="220" height="170" rx="8" fill="#fff" stroke="#16325c" stroke-width="2"/>
+  <rect x="578" y="336" width="220" height="24" rx="8" fill="#16325c"/>
+  <rect x="578" y="348" width="220" height="12" fill="#16325c"/>
+  <text x="688" y="352" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">donutChart.css</text>
+
+  <text x="594" y="376" font-size="9" font-weight="600" fill="#16325c">Layout</text>
+  <text x="594" y="389" font-size="8.5" fill="#555">  side-by-side / stacked / chart-only</text>
+  <text x="594" y="402" font-size="8.5" fill="#555">  Responsive ≤480px breakpoint</text>
+  <line x1="594" y1="408" x2="786" y2="408" stroke="#eee" stroke-width="1"/>
+  <text x="594" y="421" font-size="9" font-weight="600" fill="#16325c">Interactions</text>
+  <text x="594" y="434" font-size="8.5" fill="#555">  Slice hover translate + brighten</text>
+  <text x="594" y="446" font-size="8.5" fill="#555">  Dimmed slice opacity</text>
+  <text x="594" y="458" font-size="8.5" fill="#555">  Tooltip fade-in animation</text>
+  <line x1="594" y1="464" x2="786" y2="464" stroke="#eee" stroke-width="1"/>
+  <text x="594" y="477" font-size="9" font-weight="600" fill="#16325c">States</text>
+  <text x="594" y="490" font-size="8.5" fill="#555">  Loading / Empty / Error</text>
+  <text x="594" y="502" font-size="8.5" fill="#555">  SLDS card + color tokens</text>
+
+  <!-- Arrow JS → HTML -->
+  <line x1="280" y1="420" x2="308" y2="420" stroke="#16325c" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="286" y="415" font-size="8" fill="#16325c">render</text>
+
+  <!-- Arrow HTML → CSS -->
+  <line x1="550" y1="420" x2="576" y2="420" stroke="#16325c" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="555" y="415" font-size="8" fill="#16325c">style</text>
+
+  <!-- LAYER 4: Output -->
+  <text x="24" y="534" font-size="10" font-weight="700" fill="#706e6b" letter-spacing="1">RENDERED OUTPUT</text>
+
+  <rect x="60" y="542" width="130" height="56" rx="8" fill="#eaf7ee" stroke="#04844B" stroke-width="1.5"/>
+  <text x="125" y="563" text-anchor="middle" font-size="10.5" font-weight="700" fill="#04844B">SVG Donut/Pie</text>
+  <text x="125" y="578" text-anchor="middle" font-size="8.5" fill="#444">Animated slices</text>
+  <text x="125" y="590" text-anchor="middle" font-size="8.5" fill="#444">Center text</text>
+
+  <rect x="210" y="542" width="130" height="56" rx="8" fill="#eaf7ee" stroke="#04844B" stroke-width="1.5"/>
+  <text x="275" y="563" text-anchor="middle" font-size="10.5" font-weight="700" fill="#04844B">Hover Tooltip</text>
+  <text x="275" y="578" text-anchor="middle" font-size="8.5" fill="#444">Label + Value</text>
+  <text x="275" y="590" text-anchor="middle" font-size="8.5" fill="#444">Percentage share</text>
+
+  <rect x="360" y="542" width="130" height="56" rx="8" fill="#eaf7ee" stroke="#04844B" stroke-width="1.5"/>
+  <text x="425" y="563" text-anchor="middle" font-size="10.5" font-weight="700" fill="#04844B">Legend Panel</text>
+  <text x="425" y="578" text-anchor="middle" font-size="8.5" fill="#444">Swatch + label</text>
+  <text x="425" y="590" text-anchor="middle" font-size="8.5" fill="#444">Value + %</text>
+
+  <rect x="510" y="542" width="130" height="56" rx="8" fill="#eaf7ee" stroke="#04844B" stroke-width="1.5"/>
+  <text x="575" y="563" text-anchor="middle" font-size="10.5" font-weight="700" fill="#04844B">ARIA / A11y</text>
+  <text x="575" y="578" text-anchor="middle" font-size="8.5" fill="#444">role=button slices</text>
+  <text x="575" y="590" text-anchor="middle" font-size="8.5" fill="#444">aria-live tooltip</text>
+
+  <rect x="660" y="542" width="130" height="56" rx="8" fill="#eaf7ee" stroke="#04844B" stroke-width="1.5"/>
+  <text x="725" y="563" text-anchor="middle" font-size="10.5" font-weight="700" fill="#04844B">Responsive</text>
+  <text x="725" y="578" text-anchor="middle" font-size="8.5" fill="#444">Mobile stacked</text>
+  <text x="725" y="590" text-anchor="middle" font-size="8.5" fill="#444">≤ 480 px</text>
+
+  <!-- Arrows from LWC to output -->
+  <line x1="170" y1="506" x2="125" y2="540" stroke="#04844B" stroke-width="1.2" marker-end="url(#arr-green)" stroke-dasharray="3,2"/>
+  <line x1="430" y1="506" x2="275" y2="540" stroke="#04844B" stroke-width="1.2" marker-end="url(#arr-green)" stroke-dasharray="3,2"/>
+  <line x1="430" y1="506" x2="425" y2="540" stroke="#04844B" stroke-width="1.2" marker-end="url(#arr-green)" stroke-dasharray="3,2"/>
+  <line x1="688" y1="506" x2="575" y2="540" stroke="#04844B" stroke-width="1.2" marker-end="url(#arr-green)" stroke-dasharray="3,2"/>
+  <line x1="688" y1="506" x2="725" y2="540" stroke="#04844B" stroke-width="1.2" marker-end="url(#arr-green)" stroke-dasharray="3,2"/>
+
+  <!-- Legend key -->
+  <line x1="60" y1="612" x2="90" y2="612" stroke="#5a6ea1" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="94" y="615" font-size="8.5" fill="#706e6b">@api / @wire data flow</text>
+  <line x1="200" y1="612" x2="230" y2="612" stroke="#04844B" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="234" y="615" font-size="8.5" fill="#706e6b">render output</text>
+  <line x1="320" y1="612" x2="350" y2="612" stroke="#16325c" stroke-width="1.5"/>
+  <text x="354" y="615" font-size="8.5" fill="#706e6b">internal data binding</text>
+</svg>
